@@ -1,7 +1,21 @@
 document.getElementById('start-btn').addEventListener('click', () => {
-    console.log('Game started!');
+    window.location.href = 'menu.html';
 });
 
-document.getElementById('help-btn').addEventListener('click', () => {
-    alert('This is a memory game inspired by the book "Moonwalking with Einstein". The goal is to build your own memory palace. Have fun!');
-}); 
+const helpBtn = document.getElementById('help-btn');
+const modal = document.getElementById('help-modal');
+const closeBtn = document.getElementsByClassName('close-btn')[0];
+
+helpBtn.onclick = function() {
+    modal.style.display = "block";
+}
+
+closeBtn.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+} 
