@@ -228,4 +228,13 @@ footer a {
     font-family: sans-serif;
     z-index: 1000;
     border-radius: 25px;
+}
+
+.calendar-icon {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    font-size: 2.8rem;
+    cursor: pointer;
+    z-index: 10;
 } 
