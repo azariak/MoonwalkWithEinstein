@@ -66,6 +66,7 @@ h1 {
     font-weight: 700;
     transition: background-color 0.3s, color 0.3s;
     width: 150px; 
+    border-radius: 10px;
 }
 
 #help-btn {
@@ -204,6 +205,10 @@ footer a {
     margin: 0;
 }
 
+.game-mode-link {
+    text-decoration: none;
+}
+
 .back-arrow {
     position: fixed;
     top: 20px;
@@ -237,4 +242,9 @@ footer a {
     font-size: 2.8rem;
     cursor: pointer;
     z-index: 10;
+}
+
+.game-screen h1 {
+    background-color: transparent;
+    color: black;
 } 

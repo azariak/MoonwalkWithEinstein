@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moonwalk with Einstein</title>
+    <title>Phone Numbers - Moonwalk with Einstein</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="Calendar/calendar.css">
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../Calendar/calendar.css">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 </head>
-<body>
-    <div class="development-banner">
-        <p>Super early alpha version! (Began 18 July 2025)</p>
-    </div>
-    <div id="home-calendar-icon" class="calendar-icon">📅</div>
+<body class="menu-page">
+    <a href="../menu.html" class="back-arrow">←</a>
+    <div id="pn-calendar-icon" class="calendar-icon">📅</div>
     <div id="calendar-placeholder">
         <div id="calendar-container" style="display: none;">
             <div class="calendar-header">
@@ -35,30 +33,13 @@
             </div>
         </div>
     </div>
-    <div id="start-screen">
-        <h1>MOONWALK WITH EINSTEIN</h1>
-        <div class="button-container">
-            <button id="start-btn">Start</button>
-            <button id="help-btn">?</button>
-        </div>
+    <div class="game-screen">
+        <h1>Phone Numbers</h1>
     </div>
-
-    <div id="help-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2>Help</h2>
-            <p>This is a memory game inspired by the book Moonwalking with Einstein. Stay tuned as I build this site. Have fun!</p>
-        </div>
-    </div>
-
-    <footer>
-        <p>Inspired by <a href="https://en.wikipedia.org/wiki/Moonwalking_with_Einstein" target="_blank" rel="noopener noreferrer">Moonwalking with Einstein</a>, built by <a href="https://azariak.com" target="_blank" rel="noopener noreferrer">Azaria Kelman</a>.</p>
-    </footer>
-    <script src="script.js"></script>
-    <script src="Calendar/calendar.js"></script>
+    <script src="../Calendar/calendar.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            initializeCalendar('calendar-container', 'home-calendar-icon');
+            initializeCalendar('calendar-container', 'pn-calendar-icon');
         });
     </script>
 </body>
