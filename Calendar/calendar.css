@@ -81,4 +81,21 @@
     padding: 10px 5px;
     border-radius: 50%;
     font-size: 1rem;
+    position: relative;
+}
+
+#calendar-container #calendar-days .day.visited {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+#calendar-container #calendar-days .day .x-mark {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 0.8rem;
+    color: #ff4444;
+    font-weight: bold;
+    line-height: 1;
 } 
