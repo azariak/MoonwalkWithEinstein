@@ -9,3 +9,4 @@
 - Refactor to reduce duplicate code for calendar, make streak work
 - Calendar calculating
 - Music
+- View source code/open-source

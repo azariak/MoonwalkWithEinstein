@@ -35,11 +35,31 @@
     </div>
     <div class="game-screen">
         <h1>Phone Numbers</h1>
+        <div id="memory-game-container"></div>
     </div>
     <script src="../Calendar/calendar.js"></script>
+    <script src="../shared-memory-game.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            initializeCalendar('calendar-container', 'pn-calendar-icon');
+            if (typeof initializeCalendar === 'function') {
+                initializeCalendar('calendar-container', 'pn-calendar-icon');
+            }
+
+            // Data generator for phone numbers
+            function generatePhoneNumbers(numItems) {
+                const phoneNumbers = [];
+                for (let i = 0; i < numItems; i++) {
+                    // Generate random 10-digit phone number in format (XXX) XXX-XXXX
+                    const areaCode = Math.floor(Math.random() * 900) + 100; // 100-999
+                    const exchange = Math.floor(Math.random() * 900) + 100; // 100-999
+                    const number = Math.floor(Math.random() * 10000).toString().padStart(4, '0'); // 0000-9999
+                    phoneNumbers.push(`(${areaCode}) ${exchange}-${number}`);
+                }
+                return phoneNumbers;
+            }
+
+            // Initialize the memory game
+            new MemoryGame('memory-game-container', generatePhoneNumbers);
         });
     </script>
 </body>

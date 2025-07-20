@@ -35,30 +35,10 @@
     </div>
     <div class="game-screen">
         <h1>Memory Palace</h1>
-        <div class="game-mode-container">
-            <div class="game-mode-card">
-                <h2>Number of Objects</h2>
-                <input type="number" id="num-objects" value="10" min="1" style="width: 80%; font-size: 1.2rem; text-align: center; margin-top: 10px; border-radius: 5px; border: 1px solid black;">
-            </div>
-            <div class="game-mode-card">
-                <h2>Time interval (s)</h2>
-                <input type="number" id="duration" value="5" min="1" style="width: 80%; font-size: 1.2rem; text-align: center; margin-top: 10px; border-radius: 5px; border: 1px solid black;">
-            </div>
-        </div>
-        <div class="button-container" style="margin-top: 30px;">
-            <button id="start-game-btn" style="padding: 15px 30px; font-size: 1.5rem; cursor: pointer; border: 2px solid black; background-color: white; color: black; font-weight: 700; transition: background-color 0.3s, color 0.3s; width: 200px; border-radius: 10px;">Start Game</button>
-            <div id="flashcard-object" style="display: none; font-size: 4rem; color: black; background-color: white; padding: 40px; border-radius: 10px; border: 2px solid black; margin-top: 20px;"></div>
-            <div id="reveal-buttons" style="display: none; margin-top: 20px;">
-                <button id="reveal-next-btn" style="padding: 10px 20px; font-size: 1.2rem; cursor: pointer; border: 2px solid black; background-color: white; color: black; font-weight: 700; border-radius: 10px; margin-right: 10px;">Reveal Next</button>
-                <button id="reveal-all-btn" style="padding: 10px 20px; font-size: 1.2rem; cursor: pointer; border: 2px solid black; background-color: white; color: black; font-weight: 700; border-radius: 10px;">Reveal All</button>
-            </div>
-            <div id="revealed-objects" style="display: none; margin-top: 20px; text-align: left; background-color: white; padding: 20px; border-radius: 10px; border: 2px solid black;"></div>
-            <div id="new-game-container" style="display: none; margin-top: 20px;">
-                <button id="new-game-btn" style="padding: 15px 30px; font-size: 1.5rem; cursor: pointer; border: 2px solid black; background-color: white; color: black; font-weight: 700; border-radius: 10px;">New Game</button>
-            </div>
-        </div>
+        <div id="memory-game-container"></div>
     </div>
     <script src="../Calendar/calendar.js"></script>
+    <script src="../shared-memory-game.js"></script>
     <script src="objects.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -66,143 +46,18 @@
                 initializeCalendar('calendar-container', 'mp-calendar-icon');
             }
 
-            let gameObjects = [];
-            let revealIndex = 0;
-
-            function resetGame() {
-                // Reset all display states
-                document.getElementById('start-game-btn').style.display = 'none';
-                document.getElementById('flashcard-object').style.display = 'none';
-                document.getElementById('reveal-buttons').style.display = 'none';
-                document.getElementById('revealed-objects').style.display = 'none';
-                document.getElementById('new-game-container').style.display = 'none';
-                document.getElementById('revealed-objects').innerHTML = '';
-                document.getElementById('reveal-next-btn').style.display = 'inline-block';
-                document.getElementById('reveal-all-btn').style.display = 'inline-block';
-                document.getElementById('reveal-next-btn').textContent = 'Reveal First';
-                gameObjects = [];
-                revealIndex = 0;
-                
-                // Automatically start new game
-                const numObjects = parseInt(document.getElementById('num-objects').value, 10);
-                const duration = parseInt(document.getElementById('duration').value, 10) * 1000;
-
-                if (isNaN(numObjects) || numObjects <= 0 || isNaN(duration) || duration <= 0) {
-                    alert('Please enter valid numbers for objects and duration.');
-                    document.getElementById('start-game-btn').style.display = 'block';
-                    return;
-                }
-
-                const flashcard = document.getElementById('flashcard-object');
-                flashcard.style.display = 'block';
-
+            // Data generator for objects
+            function generateObjects(numItems) {
                 const shuffledObjects = [...window.memoryPalaceObjects];
                 for (let i = shuffledObjects.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
                     [shuffledObjects[i], shuffledObjects[j]] = [shuffledObjects[j], shuffledObjects[i]];
                 }
-                
-                gameObjects = shuffledObjects.slice(0, numObjects);
-                revealIndex = 0;
-                let currentIndex = 0;
-
-                const showNextObject = () => {
-                    if (currentIndex < gameObjects.length) {
-                        flashcard.textContent = gameObjects[currentIndex++];
-                    } else {
-                        flashcard.style.display = 'none';
-                        document.getElementById('reveal-buttons').style.display = 'block';
-                        document.getElementById('new-game-container').style.display = 'block';
-                        document.getElementById('reveal-next-btn').textContent = 'Reveal First';
-                        clearInterval(gameInterval);
-                    }
-                };
-
-                showNextObject();
-                const gameInterval = setInterval(showNextObject, duration);
+                return shuffledObjects.slice(0, numItems);
             }
 
-            document.getElementById('start-game-btn').addEventListener('click', () => {
-                const numObjects = parseInt(document.getElementById('num-objects').value, 10);
-                const duration = parseInt(document.getElementById('duration').value, 10) * 1000;
-
-                if (isNaN(numObjects) || numObjects <= 0 || isNaN(duration) || duration <= 0) {
-                    alert('Please enter valid numbers for objects and duration.');
-                    return;
-                }
-
-                const startBtn = document.getElementById('start-game-btn');
-                const flashcard = document.getElementById('flashcard-object');
-                
-                startBtn.style.display = 'none';
-                flashcard.style.display = 'block';
-
-                const shuffledObjects = [...window.memoryPalaceObjects];
-                for (let i = shuffledObjects.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [shuffledObjects[i], shuffledObjects[j]] = [shuffledObjects[j], shuffledObjects[i]];
-                }
-                
-                gameObjects = shuffledObjects.slice(0, numObjects);
-                revealIndex = 0;
-                let currentIndex = 0;
-
-                const showNextObject = () => {
-                    if (currentIndex < gameObjects.length) {
-                        flashcard.textContent = gameObjects[currentIndex++];
-                    } else {
-                        flashcard.style.display = 'none';
-                        document.getElementById('reveal-buttons').style.display = 'block';
-                        document.getElementById('new-game-container').style.display = 'block';
-                        document.getElementById('reveal-next-btn').textContent = 'Reveal First';
-                        clearInterval(gameInterval);
-                    }
-                };
-
-                showNextObject();
-                const gameInterval = setInterval(showNextObject, duration);
-            });
-
-            document.getElementById('reveal-next-btn').addEventListener('click', () => {
-                if (revealIndex < gameObjects.length) {
-                    const revealedDiv = document.getElementById('revealed-objects');
-                    revealedDiv.style.display = 'block';
-                    
-                    const objectElement = document.createElement('div');
-                    objectElement.textContent = `${revealIndex + 1}. ${gameObjects[revealIndex]}`;
-                    objectElement.style.margin = '5px 0';
-                    revealedDiv.appendChild(objectElement);
-                    
-                    revealIndex++;
-                    
-                    if (revealIndex === 1) {
-                        document.getElementById('reveal-next-btn').textContent = 'Reveal Next';
-                    }
-                    
-                    if (revealIndex >= gameObjects.length) {
-                        document.getElementById('reveal-buttons').style.display = 'none';
-                        document.getElementById('new-game-container').style.display = 'block';
-                    }
-                }
-            });
-
-            document.getElementById('reveal-all-btn').addEventListener('click', () => {
-                const revealedDiv = document.getElementById('revealed-objects');
-                revealedDiv.style.display = 'block';
-                revealedDiv.innerHTML = '';
-                
-                gameObjects.forEach((obj, index) => {
-                    const objectElement = document.createElement('div');
-                    objectElement.textContent = `${index + 1}. ${obj}`;
-                    objectElement.style.margin = '5px 0';
-                    revealedDiv.appendChild(objectElement);
-                });
-                
-                document.getElementById('reveal-buttons').style.display = 'none';
-                document.getElementById('new-game-container').style.display = 'block';
-            });
-
-            document.getElementById('new-game-btn').addEventListener('click', resetGame);
+            // Initialize the memory game
+            new MemoryGame('memory-game-container', generateObjects);
         });
     </script>
 </body>
