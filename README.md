@@ -4,10 +4,10 @@
 
 
 ## TODO
-- Daily streak
 - Keep scores, high scores, notes. Export to PDF
-- Refactor to reduce duplicate code for calendar, make streak work
+- Refactor to reduce duplicate code for calendar?
 - Calendar calculating
 - Music
 - View source code/open-source
 - Fix layout shifts, load time between pages (make one monopage with JS?)
+- Decks of cards

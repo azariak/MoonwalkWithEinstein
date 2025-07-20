@@ -1,15 +1,39 @@
 class MemoryGame {
-    constructor(containerId, dataGenerator) {
+    constructor(containerId, dataGenerator, gameMode) {
         this.containerId = containerId;
         this.dataGenerator = dataGenerator;
+        this.gameMode = gameMode;
         this.gameData = [];
         this.revealIndex = 0;
         this.gameInterval = null;
         
         this.setupHTML();
+        this.loadSettings();
         this.setupEventListeners();
     }
     
+    loadSettings() {
+        if (!this.gameMode) return;
+        const numItems = localStorage.getItem(`${this.gameMode}_num_items`);
+        const duration = localStorage.getItem(`${this.gameMode}_duration_seconds`);
+
+        if (numItems) {
+            document.getElementById('num-items').value = numItems;
+        }
+        if (duration) {
+            document.getElementById('duration').value = duration;
+        }
+    }
+
+    saveSettings() {
+        if (!this.gameMode) return;
+        const numItems = document.getElementById('num-items').value;
+        const duration = document.getElementById('duration').value;
+
+        localStorage.setItem(`${this.gameMode}_num_items`, numItems);
+        localStorage.setItem(`${this.gameMode}_duration_seconds`, duration);
+    }
+
     setupHTML() {
         const container = document.getElementById(this.containerId);
         container.innerHTML = `
@@ -43,9 +67,12 @@ class MemoryGame {
         document.getElementById('reveal-next-btn').addEventListener('click', () => this.revealNext());
         document.getElementById('reveal-all-btn').addEventListener('click', () => this.revealAll());
         document.getElementById('new-game-btn').addEventListener('click', () => this.resetGame());
+        document.getElementById('num-items').addEventListener('input', () => this.saveSettings());
+        document.getElementById('duration').addEventListener('input', () => this.saveSettings());
     }
     
     startGame() {
+        this.saveSettings();
         const numItems = parseInt(document.getElementById('num-items').value, 10);
         const duration = parseInt(document.getElementById('duration').value, 10) * 1000;
 
