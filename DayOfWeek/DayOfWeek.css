@@ -62,4 +62,37 @@
     color: black;
     border-radius: 8px;
     visibility: hidden; /* Initially hidden */
+    margin-bottom: 2rem; /* Add margin for spacing */
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    #game-container {
+        padding-top: 2rem;
+    }
+
+    #date-display {
+        font-size: 2rem;
+    }
+
+    #choices-container {
+        flex-direction: column;
+        width: 80%;
+    }
+
+    .choice-btn {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+
+    #result-container {
+        font-size: 1.2rem;
+    }
+    
+    #next-date-btn {
+        width: 80%;
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
 } 

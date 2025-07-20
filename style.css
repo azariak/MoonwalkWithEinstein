@@ -355,4 +355,11 @@ footer a {
 .game-screen h1 {
     background-color: transparent;
     color: black;
+}
+
+/* Override default non-scrolling behavior for game screens */
+html:has(body.game-screen),
+body.game-screen {
+    overflow: revert;
+    height: revert;
 } 
