@@ -6,7 +6,7 @@
     <title>Moonwalk with Einstein</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=fallback" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="Calendar/calendar.css">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -15,7 +15,6 @@
     <div class="development-banner">
         <p>Super early alpha version! (Began 18 July 2025)</p>
     </div>
-    <div id="home-calendar-icon" class="calendar-icon">📅</div>
     <div id="calendar-placeholder">
         <div id="calendar-container" style="display: none;">
             <div class="calendar-header">
@@ -61,5 +60,6 @@
             initializeCalendar('calendar-container', 'home-calendar-icon');
         });
     </script>
+    <div id="home-calendar-icon" class="calendar-icon">📅</div>
 </body>
 </html> 

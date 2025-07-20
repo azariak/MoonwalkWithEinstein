@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Day of the Week Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=fallback" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="DayOfWeek.css">
+    <link rel="stylesheet" href="../Calendar/calendar.css">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+</head>
+<body class="game-screen">
+
+    <a href="../menu.html" class="back-arrow">←</a>
+    <div id="game-calendar-icon" class="calendar-icon">📅</div>
+    <div id="calendar-placeholder"></div>
+
+    <div id="game-container">
+        <h1>What day of the week was</h1>
+        <div id="date-display"></div>
+        <div id="choices-container"></div>
+        <div id="result-container"></div>
+        <button id="next-date-btn">Next Date</button>
+    </div>
+
+    <footer>
+        <p>Inspired by <a href="https://en.wikipedia.org/wiki/Moonwalking_with_Einstein" target="_blank" rel="noopener noreferrer">Moonwalking with Einstein</a>, built by <a href="https://azariak.com" target="_blank" rel="noopener noreferrer">Azaria Kelman</a>.</p>
+    </footer>
+
+    <script src="DayOfWeek.js"></script>
+    <script src="../Calendar/calendar.js"></script>
+    <script src="../shared-memory-game.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeCalendar('calendar-container', 'game-calendar-icon');
+            initializeSharedLogic();
+        });
+    </script>
+
+</body>
+</html> 

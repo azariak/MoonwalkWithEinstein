@@ -11,3 +11,4 @@
 - View source code/open-source
 - Fix layout shifts, load time between pages (make one monopage with JS?)
 - Decks of cards
+- Speculation rules api
