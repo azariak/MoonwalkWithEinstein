@@ -99,3 +99,72 @@
     font-weight: bold;
     line-height: 1;
 } 
+
+/* Mobile responsive styles for calendar */
+@media (max-width: 768px) {
+    #calendar-container {
+        width: 320px;
+        right: 15px;
+        top: 60px;
+    }
+
+    #calendar-container .calendar-header h3 {
+        font-size: 1rem;
+    }
+
+    #calendar-container .close-calendar-btn {
+        font-size: 1.6rem;
+    }
+
+    #calendar-container .month-nav {
+        font-size: 1.6rem;
+    }
+
+    #calendar-container #month-year {
+        font-size: 1.1rem;
+    }
+
+    #calendar-container .calendar-body {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #calendar-container {
+        width: 290px;
+        right: 10px;
+        top: 55px;
+        left: 50%;
+        transform: translateX(-50%);
+        right: auto;
+    }
+
+    #calendar-container .calendar-header h3 {
+        font-size: 0.9rem;
+    }
+
+    #calendar-container .close-calendar-btn {
+        font-size: 1.5rem;
+    }
+
+    #calendar-container .month-nav {
+        font-size: 1.4rem;
+    }
+
+    #calendar-container #month-year {
+        font-size: 1rem;
+    }
+
+    #calendar-container .calendar-body {
+        padding: 10px;
+    }
+
+    #calendar-container .calendar-grid {
+        gap: 3px;
+    }
+
+    #calendar-container #calendar-days .day {
+        padding: 8px 3px;
+        font-size: 0.9rem;
+    }
+} 
