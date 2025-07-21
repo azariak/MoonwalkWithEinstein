@@ -44,7 +44,7 @@ class MemoryGame {
                 </div>
                 <div class="game-mode-card">
                     <h2>Time interval (s)</h2>
-                    <input type="number" id="duration" value="5" min="1" style="width: 80%; font-size: 1.2rem; text-align: center; margin-top: 10px; border-radius: 5px; border: 1px solid black;">
+                    <input type="number" id="duration" value="5" min="0.1" step="0.1" style="width: 80%; font-size: 1.2rem; text-align: center; margin-top: 10px; border-radius: 5px; border: 1px solid black;">
                 </div>
             </div>
             <div class="button-container" style="margin-top: 30px;">
@@ -74,7 +74,7 @@ class MemoryGame {
     startGame() {
         this.saveSettings();
         const numItems = parseInt(document.getElementById('num-items').value, 10);
-        const duration = parseInt(document.getElementById('duration').value, 10) * 1000;
+        const duration = parseFloat(document.getElementById('duration').value) * 1000;
 
         if (isNaN(numItems) || numItems <= 0 || isNaN(duration) || duration <= 0) {
             alert('Please enter valid numbers for items and duration.');
