@@ -7,7 +7,7 @@ const modal = document.getElementById('help-modal');
 const closeBtn = document.getElementsByClassName('close-btn')[0];
 
 helpBtn.onclick = function() {
-    modal.style.display = "block";
+    modal.style.display = "flex";
 }
 
 closeBtn.onclick = function() {
