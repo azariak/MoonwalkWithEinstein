@@ -385,3 +385,117 @@ body.game-screen {
     overflow: revert;
     min-height: 100vh;
 } 
+
+#custom-lists-manager {
+    margin-top: 15rem; /* Pushed even further down */
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    text-align: center; /* Center align the content */
+}
+
+#custom-lists-manager h2 {
+    margin-top: 0;
+    font-size: 1.2rem; /* More subtle heading */
+    color: #555;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0.5rem; /* Reduced spacing */
+}
+
+#custom-lists-container {
+    margin-top: 0; /* Reduced spacing */
+    display: inline-block; /* To allow centering while keeping content left-aligned */
+    text-align: left;
+    position: relative;
+}
+
+#custom-lists-container .custom-list-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem; /* Reduced spacing */
+    justify-content: space-between; /* Align items nicely */
+}
+
+.list-item-actions {
+    position: relative; /* For positioning the menu */
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.toggle-actions-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 1.2rem; /* Larger for easier clicking */
+    line-height: 1;
+    padding: 0 0.5rem 0.25rem; /* Adjusted padding for vertical ellipsis */
+}
+
+.toggle-actions-btn:hover {
+    color: #333;
+}
+
+.actions-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Position below the toggle button */
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.actions-menu.visible {
+    display: block;
+}
+
+.actions-menu button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    text-align: left;
+    color: #333;
+    cursor: pointer;
+}
+
+.actions-menu button:hover {
+    background-color: #f5f5f5;
+}
+
+/* Remove old individual button styles */
+.list-item-actions .edit-name-btn,
+.list-item-actions .edit-items-btn,
+.list-item-actions .delete-btn {
+    font-size: 0.9rem; /* Consistent font size */
+    margin: 0;
+}
+
+#custom-lists-container .custom-list-item label {
+    margin-left: 0.5rem;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+#import-list-btn {
+    display: block; /* Make it a block element */
+    margin: 1rem auto 0; /* Reduced spacing */
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    background-color: #4CAF50; /* Keeping the green for visibility */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+#import-list-btn:hover {
+    background-color: #45a049;
+} 

@@ -36,6 +36,11 @@
     <div class="game-screen">
         <h1>Memory Palace</h1>
         <div id="memory-game-container"></div>
+        <div id="custom-lists-manager">
+            <h2>Custom Word Lists</h2>
+            <div id="custom-lists-container"></div>
+            <button id="import-list-btn">Import New List</button>
+        </div>
     </div>
     <script src="../Calendar/calendar.js"></script>
     <script src="../shared-memory-game.js"></script>
@@ -46,9 +51,81 @@
                 initializeCalendar('calendar-container', 'mp-calendar-icon');
             }
 
+            const customListsContainer = document.getElementById('custom-lists-container');
+            const importListBtn = document.getElementById('import-list-btn');
+            const gameContainer = 'memory-game-container';
+            const storageKeyPrefix = 'customList_';
+            const gameKey = 'memory_palace';
+            let game;
+
+            function getCustomLists() {
+                const lists = {};
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith(storageKeyPrefix)) {
+                        lists[key] = JSON.parse(localStorage.getItem(key));
+                    }
+                }
+                return lists;
+            }
+
+            function renderCustomLists() {
+                customListsContainer.innerHTML = '';
+                const lists = getCustomLists();
+                // The message for no custom lists has been removed.
+                for (const key in lists) {
+                    const listName = key.substring(storageKeyPrefix.length);
+                    const listDiv = document.createElement('div');
+                    listDiv.className = 'custom-list-item';
+                    listDiv.innerHTML = `
+                        <input type="checkbox" id="${key}" name="${key}">
+                        <label for="${key}">${listName}</label>
+                        <div class="list-item-actions">
+                            <button class="toggle-actions-btn">⋮</button>
+                            <div class="actions-menu">
+                                <button class="edit-name-btn" data-key="${key}">Rename</button>
+                                <button class="edit-items-btn" data-key="${key}">Edit</button>
+                                <button class="delete-btn" data-key="${key}">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                    customListsContainer.appendChild(listDiv);
+                }
+            }
+
+            importListBtn.addEventListener('click', () => {
+                const listName = prompt('Enter a name for your new word list:');
+                if (!listName) return;
+
+                const wordsString = prompt('Paste your comma-separated list of words:');
+                if (!wordsString) return;
+
+                const words = wordsString.split(',').map(word => word.trim()).filter(word => word.length > 0);
+                if (words.length > 0) {
+                    localStorage.setItem(`${storageKeyPrefix}${listName}`, JSON.stringify(words));
+                    renderCustomLists();
+                    initializeGame(); // Re-initialize to apply changes
+                }
+            });
+
             // Data generator for objects
             function generateObjects(numItems) {
-                const shuffledObjects = [...window.memoryPalaceObjects];
+                let sourceObjects = [];
+                const checkedLists = document.querySelectorAll('#custom-lists-container input[type="checkbox"]:checked');
+
+                if (checkedLists.length > 0) {
+                    checkedLists.forEach(checkbox => {
+                        const listKey = checkbox.id;
+                        const storedList = localStorage.getItem(listKey);
+                        if (storedList) {
+                            sourceObjects.push(...JSON.parse(storedList));
+                        }
+                    });
+                } else {
+                    sourceObjects = [...window.memoryPalaceObjects];
+                }
+
+                const shuffledObjects = [...sourceObjects];
                 for (let i = shuffledObjects.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
                     [shuffledObjects[i], shuffledObjects[j]] = [shuffledObjects[j], shuffledObjects[i]];
@@ -56,8 +133,84 @@
                 return shuffledObjects.slice(0, numItems);
             }
 
-            // Initialize the memory game
-            new MemoryGame('memory-game-container', generateObjects, 'memory_palace');
+            function initializeGame() {
+                if(game) {
+                    // If a game instance exists, we might need to tear it down
+                    // or re-initialize it. For now, we create a new one.
+                    document.getElementById(gameContainer).innerHTML = '';
+                }
+                game = new MemoryGame(gameContainer, generateObjects, gameKey);
+            }
+
+            renderCustomLists();
+            initializeGame();
+
+            customListsContainer.addEventListener('change', (event) => {
+                if (event.target.type === 'checkbox') {
+                    initializeGame();
+                }
+            });
+
+            customListsContainer.addEventListener('click', (event) => {
+                const target = event.target;
+
+                // Handle toggle button clicks
+                if (target.classList.contains('toggle-actions-btn')) {
+                    const menu = target.nextElementSibling;
+                    const currentlyVisible = document.querySelector('.actions-menu.visible');
+                    
+                    if (currentlyVisible && currentlyVisible !== menu) {
+                        currentlyVisible.classList.remove('visible');
+                    }
+                    menu?.classList.toggle('visible');
+                    return;
+                }
+
+                const listKey = target.dataset.key;
+                if (!listKey) return;
+
+                // Handle action button clicks
+                if (target.classList.contains('delete-btn')) {
+                    const listName = listKey.substring(storageKeyPrefix.length);
+                    if (confirm(`Are you sure you want to delete the list "${listName}"?`)) {
+                        localStorage.removeItem(listKey);
+                        renderCustomLists();
+                        initializeGame();
+                    }
+                } else if (target.classList.contains('edit-name-btn')) {
+                    const oldName = listKey.substring(storageKeyPrefix.length);
+                    const newName = prompt('Enter the new name for the list:', oldName);
+                    if (newName && newName.trim() && newName !== oldName) {
+                        const words = localStorage.getItem(listKey);
+                        if (words) {
+                            localStorage.setItem(`${storageKeyPrefix}${newName}`, words);
+                            localStorage.removeItem(listKey);
+                            renderCustomLists();
+                            initializeGame();
+                        }
+                    }
+                } else if (target.classList.contains('edit-items-btn')) {
+                    const listName = listKey.substring(storageKeyPrefix.length);
+                    try {
+                        const words = JSON.parse(localStorage.getItem(listKey) || '[]');
+                        const newWordsString = prompt(`Edit the words for "${listName}":`, words.join(', '));
+
+                        if (newWordsString !== null) {
+                            const newWords = newWordsString.split(',').map(word => word.trim()).filter(Boolean);
+                            localStorage.setItem(listKey, JSON.stringify(newWords));
+                            initializeGame();
+                        }
+                    } catch (e) {
+                        console.error("Could not parse words from localStorage", e);
+                        alert("There was an error reading this list.");
+                    }
+                }
+
+                // Hide menu after an action is clicked
+                if (target.closest('.actions-menu')) {
+                    target.closest('.actions-menu').classList.remove('visible');
+                }
+            });
         });
     </script>
 </body>
