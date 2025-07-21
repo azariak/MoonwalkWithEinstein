@@ -379,5 +379,5 @@ footer a {
 html:has(body.game-screen),
 body.game-screen {
     overflow: revert;
-    height: revert;
+    min-height: 100vh;
 } 
