@@ -16,7 +16,23 @@
 
     <a href="../menu.html" class="back-arrow">←</a>
     <div id="game-calendar-icon" class="calendar-icon">📅</div>
-    <div id="calendar-placeholder"></div>
+    <div id="calendar-container" style="display: none;">
+        <div class="calendar-header">
+            <h3>🔥 Streak</h3>
+            <span class="close-calendar-btn">&times;</span>
+        </div>
+        <div class="calendar-body">
+            <div class="month-navigation">
+                <span class="month-nav" id="prev-month">&lt;</span>
+                <h2 id="month-year"></h2>
+                <span class="month-nav" id="next-month">&gt;</span>
+            </div>
+            <div class="calendar-grid" id="calendar-weekdays">
+                <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+            </div>
+            <div class="calendar-grid" id="calendar-days"></div>
+        </div>
+    </div>
 
     <div id="game-container">
         <h1>What day of the week was</h1>
