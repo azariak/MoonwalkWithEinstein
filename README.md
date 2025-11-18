@@ -1,12 +1,11 @@
 # MoonwalkWithEinstein
 
-## Built by Azaria Kelman, inspired by Joshua Feuer.
+## Built by Azaria Kelman, inspired by Joshua Foer.
 
 
 ## TODO
 - Keep scores, high scores, notes. Export to PDF
 - Zen mode
-- View source code/open-source
 - Fix layout shifts, load time between pages (make one monopage with JS?)
 - Decks of cards
 - Speculation rules api
