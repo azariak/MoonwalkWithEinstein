@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -16,9 +17,8 @@ body, html {
 }
 
 body {
-    background: 
-        repeating-linear-gradient(
-            to bottom,
+    background:
+        repeating-linear-gradient(to bottom,
             #cbe7e2 0,
             #cbe7e2 25vh,
             #f0f3b3 25vh,
@@ -26,8 +26,7 @@ body {
             #f3d1c8 50vh,
             #f3d1c8 75vh,
             #d1e5cd 75vh,
-            #d1e5cd 100vh
-        );
+            #d1e5cd 100vh);
     animation: move-background 20s linear forwards;
 }
 
@@ -35,6 +34,7 @@ body {
     from {
         background-position: 0 0;
     }
+
     to {
         background-position: 0 100vh;
     }
@@ -65,7 +65,7 @@ h1 {
     color: black;
     font-weight: 700;
     transition: background-color 0.3s, color 0.3s;
-    width: 150px; 
+    width: 150px;
     border-radius: 10px;
 }
 
@@ -85,7 +85,8 @@ h1 {
     transition: background-color 0.3s, color 0.3s;
 }
 
-#start-btn:hover, #help-btn:hover {
+#start-btn:hover,
+#help-btn:hover {
     background-color: black;
     color: white;
 }
@@ -131,22 +132,7 @@ h1 {
         font-size: 2rem;
     }
 
-    .calendar-icon {
-        top: 12px;
-        right: 15px;
-        font-size: 2.2rem;
-    }
-
-    /* Ensure game content doesn't overlap fixed elements */
-    #menu-screen {
-        padding-top: 80px;
-        padding-bottom: 60px;
-    }
-
-    .game-screen {
-        padding-top: 80px;
-        padding-bottom: 60px;
-    }
+    .calendar-icon {}
 
     /* Modal improvements for mobile */
     .modal-content {
@@ -229,15 +215,15 @@ footer a {
 }
 
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 2000; 
+    display: none;
+    position: fixed;
+    z-index: 2000;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
     align-items: center;
     justify-content: center;
 }
@@ -250,7 +236,7 @@ footer a {
     background-color: #fefefe;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; 
+    width: 80%;
     max-width: 500px;
     border-radius: 10px;
     text-align: center;
@@ -269,11 +255,12 @@ footer a {
     color: black;
     text-decoration: none;
     cursor: pointer;
-} 
+}
 
 .video-container {
     position: relative;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    padding-bottom: 56.25%;
+    /* 16:9 aspect ratio */
     height: 0;
     overflow: hidden;
     max-width: 100%;
@@ -321,7 +308,7 @@ footer a {
 
 .game-mode-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .game-mode-card h2 {
@@ -364,28 +351,34 @@ html:has(body.game-screen),
 body.game-screen {
     overflow: revert;
     min-height: 100vh;
-} 
+}
 
 #custom-lists-manager {
-    margin-top: 15rem; /* Pushed even further down */
+    margin-top: 15rem;
+    /* Pushed even further down */
     padding: 0;
     border: none;
     background-color: transparent;
-    text-align: center; /* Center align the content */
+    text-align: center;
+    /* Center align the content */
 }
 
 #custom-lists-manager h2 {
     margin-top: 0;
-    font-size: 1.2rem; /* More subtle heading */
+    font-size: 1.2rem;
+    /* More subtle heading */
     color: #555;
     border-bottom: none;
     padding-bottom: 0;
-    margin-bottom: 0.5rem; /* Reduced spacing */
+    margin-bottom: 0.5rem;
+    /* Reduced spacing */
 }
 
 #custom-lists-container {
-    margin-top: 0; /* Reduced spacing */
-    display: inline-block; /* To allow centering while keeping content left-aligned */
+    margin-top: 0;
+    /* Reduced spacing */
+    display: inline-block;
+    /* To allow centering while keeping content left-aligned */
     text-align: left;
     position: relative;
 }
@@ -393,12 +386,15 @@ body.game-screen {
 #custom-lists-container .custom-list-item {
     display: flex;
     align-items: center;
-    margin-bottom: 0.25rem; /* Reduced spacing */
-    justify-content: space-between; /* Align items nicely */
+    margin-bottom: 0.25rem;
+    /* Reduced spacing */
+    justify-content: space-between;
+    /* Align items nicely */
 }
 
 .list-item-actions {
-    position: relative; /* For positioning the menu */
+    position: relative;
+    /* For positioning the menu */
     display: flex;
     align-items: center;
     margin-left: 1rem;
@@ -409,9 +405,11 @@ body.game-screen {
     border: none;
     color: #888;
     cursor: pointer;
-    font-size: 1.2rem; /* Larger for easier clicking */
+    font-size: 1.2rem;
+    /* Larger for easier clicking */
     line-height: 1;
-    padding: 0 0.5rem 0.25rem; /* Adjusted padding for vertical ellipsis */
+    padding: 0 0.5rem 0.25rem;
+    /* Adjusted padding for vertical ellipsis */
 }
 
 .toggle-actions-btn:hover {
@@ -421,12 +419,13 @@ body.game-screen {
 .actions-menu {
     display: none;
     position: absolute;
-    top: 100%; /* Position below the toggle button */
+    top: 100%;
+    /* Position below the toggle button */
     right: 0;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 10;
 }
 
@@ -453,7 +452,8 @@ body.game-screen {
 .list-item-actions .edit-name-btn,
 .list-item-actions .edit-items-btn,
 .list-item-actions .delete-btn {
-    font-size: 0.9rem; /* Consistent font size */
+    font-size: 0.9rem;
+    /* Consistent font size */
     margin: 0;
 }
 
@@ -464,11 +464,225 @@ body.game-screen {
 }
 
 #import-list-btn {
-    display: block; /* Make it a block element */
-    margin: 1rem auto 0; /* Reduced spacing */
+    display: block;
+    /* Make it a block element */
+    margin: 1rem auto 0;
+    /* Reduced spacing */
     padding: 0.8rem 1.2rem;
     border-radius: 5px;
-    background-color: #4CAF50; /* Keeping the green for visibility */
+    background-color: #4CAF50;
+    /* Keeping the green for visibility */
+    color: white;
+    border: none;
+    max-width: 100%;
+    background: #000;
+    margin-top: 20px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.menu-page body {
+    animation: none;
+}
+
+#menu-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+.game-mode-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.game-mode-card {
+    background-color: white;
+    padding: 20px 40px;
+    border-radius: 10px;
+    border: 2px solid black;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.game-mode-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.game-mode-card h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    color: black;
+    margin: 0;
+}
+
+.game-mode-link {
+    text-decoration: none;
+}
+
+.back-arrow {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 2.5rem;
+    color: black;
+    text-decoration: none;
+    z-index: 10;
+}
+
+.calendar-icon {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    font-size: 2.8rem;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.game-screen h1 {
+    background-color: transparent;
+    color: black;
+}
+
+/* Override default non-scrolling behavior for game screens */
+html:has(body.game-screen),
+body.game-screen {
+    overflow: revert;
+    min-height: 100vh;
+}
+
+#custom-lists-manager {
+    margin-top: 15rem;
+    /* Pushed even further down */
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    /* Center align the content */
+}
+
+#custom-lists-manager h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    /* More subtle heading */
+    color: #555;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0.5rem;
+    /* Reduced spacing */
+}
+
+#custom-lists-container {
+    margin-top: 0;
+    /* Reduced spacing */
+    display: inline-block;
+    /* To allow centering while keeping content left-aligned */
+    text-align: left;
+    position: relative;
+}
+
+#custom-lists-container .custom-list-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem;
+    /* Reduced spacing */
+    justify-content: space-between;
+    /* Align items nicely */
+}
+
+.list-item-actions {
+    position: relative;
+    /* For positioning the menu */
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.toggle-actions-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 1.2rem;
+    /* Larger for easier clicking */
+    line-height: 1;
+    padding: 0 0.5rem 0.25rem;
+    /* Adjusted padding for vertical ellipsis */
+}
+
+.toggle-actions-btn:hover {
+    color: #333;
+}
+
+.actions-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    /* Position below the toggle button */
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.actions-menu.visible {
+    display: block;
+}
+
+.actions-menu button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    text-align: left;
+    color: #333;
+    cursor: pointer;
+}
+
+.actions-menu button:hover {
+    background-color: #f5f5f5;
+}
+
+/* Remove old individual button styles */
+.list-item-actions .edit-name-btn,
+.list-item-actions .edit-items-btn,
+.list-item-actions .delete-btn {
+    font-size: 0.9rem;
+    /* Consistent font size */
+    margin: 0;
+}
+
+#custom-lists-container .custom-list-item label {
+    margin-left: 0.5rem;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+#import-list-btn {
+    display: block;
+    /* Make it a block element */
+    margin: 1rem auto 0;
+    /* Reduced spacing */
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    /* Keeping the green for visibility */
     color: white;
     border: none;
     cursor: pointer;
@@ -478,4 +692,77 @@ body.game-screen {
 
 #import-list-btn:hover {
     background-color: #45a049;
-} 
+}
+
+/* Responsive Grid for Revealed Items */
+#revealed-items {
+    display: none;
+    /* Hidden by default */
+    grid-template-columns: repeat(10, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+    text-align: left;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+#revealed-items.grid-active {
+    display: grid;
+}
+
+.revealed-card {
+    margin: 0;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.9rem;
+    background-color: #f9f9f9;
+}
+
+.revealed-card.red {
+    color: #e44145;
+}
+
+.revealed-card.black {
+    color: #2d2d2d;
+}
+
+@media (max-width: 1024px) {
+    #revealed-items {
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    #revealed-items {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    #flashcard-item {
+        width: 180px !important;
+        height: 252px !important;
+        font-size: 3.5rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #revealed-items {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 10px;
+        gap: 5px;
+    }
+
+    .revealed-card {
+        font-size: 0.8rem;
+        padding: 2px;
+    }
+
+    #flashcard-item {
+        width: 140px !important;
+        height: 196px !important;
+        font-size: 2.5rem !important;
+    }
+}

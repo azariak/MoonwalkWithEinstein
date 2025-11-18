@@ -6,32 +6,38 @@ class MemoryGame {
         this.gameData = [];
         this.revealIndex = 0;
         this.gameInterval = null;
-        
+
         this.setupHTML();
         this.loadSettings();
         this.setupEventListeners();
     }
-    
+
     loadSettings() {
         if (!this.gameMode) return;
         const numItems = localStorage.getItem(`${this.gameMode}_num_items`);
         const duration = localStorage.getItem(`${this.gameMode}_duration_seconds`);
 
         if (numItems) {
-            document.getElementById('num-items').value = numItems;
+            const numItemsInput = document.getElementById('num-items');
+            if (numItemsInput) numItemsInput.value = numItems;
         }
         if (duration) {
-            document.getElementById('duration').value = duration;
+            const durationInput = document.getElementById('duration');
+            if (durationInput) durationInput.value = duration;
         }
     }
 
     saveSettings() {
         if (!this.gameMode) return;
-        const numItems = document.getElementById('num-items').value;
-        const duration = document.getElementById('duration').value;
+        const numItemsInput = document.getElementById('num-items');
+        const durationInput = document.getElementById('duration');
 
-        localStorage.setItem(`${this.gameMode}_num_items`, numItems);
-        localStorage.setItem(`${this.gameMode}_duration_seconds`, duration);
+        if (numItemsInput) {
+            localStorage.setItem(`${this.gameMode}_num_items`, numItemsInput.value);
+        }
+        if (durationInput) {
+            localStorage.setItem(`${this.gameMode}_duration_seconds`, durationInput.value);
+        }
     }
 
     setupHTML() {
@@ -61,19 +67,29 @@ class MemoryGame {
             </div>
         `;
     }
-    
+
     setupEventListeners() {
-        document.getElementById('start-game-btn').addEventListener('click', () => this.startGame());
-        document.getElementById('reveal-next-btn').addEventListener('click', () => this.revealNext());
-        document.getElementById('reveal-all-btn').addEventListener('click', () => this.revealAll());
-        document.getElementById('new-game-btn').addEventListener('click', () => this.resetGame());
-        document.getElementById('num-items').addEventListener('input', () => this.saveSettings());
-        document.getElementById('duration').addEventListener('input', () => this.saveSettings());
+        const addListener = (id, handler, event = 'click') => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener(event, handler);
+        };
+
+        addListener('start-game-btn', () => this.startGame());
+        addListener('reveal-next-btn', () => this.revealNext());
+        addListener('reveal-all-btn', () => this.revealAll());
+        addListener('new-game-btn', () => this.resetGame());
+        addListener('num-items', () => this.saveSettings(), 'input');
+        addListener('duration', () => this.saveSettings(), 'input');
     }
-    
+
     startGame() {
         this.saveSettings();
-        const numItems = parseInt(document.getElementById('num-items').value, 10);
+        let numItems = 10;
+        const numItemsInput = document.getElementById('num-items');
+        if (numItemsInput) {
+            numItems = parseInt(numItemsInput.value, 10);
+        }
+
         const duration = parseFloat(document.getElementById('duration').value) * 1000;
 
         if (isNaN(numItems) || numItems <= 0 || isNaN(duration) || duration <= 0) {
@@ -83,7 +99,7 @@ class MemoryGame {
 
         const startBtn = document.getElementById('start-game-btn');
         const flashcard = document.getElementById('flashcard-item');
-        
+
         startBtn.style.display = 'none';
         flashcard.style.display = 'block';
 
@@ -106,50 +122,50 @@ class MemoryGame {
         showNextItem();
         this.gameInterval = setInterval(showNextItem, duration);
     }
-    
+
     revealNext() {
         if (this.revealIndex < this.gameData.length) {
             const revealedDiv = document.getElementById('revealed-items');
             revealedDiv.style.display = 'block';
-            
+
             const itemElement = document.createElement('div');
             itemElement.textContent = `${this.revealIndex + 1}. ${this.gameData[this.revealIndex]}`;
             itemElement.style.margin = '5px 0';
             revealedDiv.appendChild(itemElement);
-            
+
             this.revealIndex++;
-            
+
             if (this.revealIndex === 1) {
                 document.getElementById('reveal-next-btn').textContent = 'Reveal Next';
             }
-            
+
             if (this.revealIndex >= this.gameData.length) {
                 document.getElementById('reveal-buttons').style.display = 'none';
             }
         }
     }
-    
+
     revealAll() {
         const revealedDiv = document.getElementById('revealed-items');
         revealedDiv.style.display = 'block';
         revealedDiv.innerHTML = '';
-        
+
         this.gameData.forEach((item, index) => {
             const itemElement = document.createElement('div');
             itemElement.textContent = `${index + 1}. ${item}`;
             itemElement.style.margin = '5px 0';
             revealedDiv.appendChild(itemElement);
         });
-        
+
         document.getElementById('reveal-buttons').style.display = 'none';
     }
-    
+
     resetGame() {
         // Clear any running interval
         if (this.gameInterval) {
             clearInterval(this.gameInterval);
         }
-        
+
         // Reset all display states
         document.getElementById('start-game-btn').style.display = 'none';
         document.getElementById('flashcard-item').style.display = 'none';
@@ -162,11 +178,11 @@ class MemoryGame {
         document.getElementById('reveal-next-btn').textContent = 'Reveal First';
         this.gameData = [];
         this.revealIndex = 0;
-        
+
         // Automatically start new game
         this.startGame();
     }
 }
 
 // Make it available globally
-window.MemoryGame = MemoryGame; 
+window.MemoryGame = MemoryGame;
