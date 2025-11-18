@@ -12,3 +12,4 @@
 - Mobile site needs better optimization, specifically for footer
 - Music
 - Refactor to reduce duplicate code for calendar?
+- Fix youtube embed in help menu
